@@ -68,21 +68,27 @@ See our plans in [ROADMAP.md](ROADMAP.md).
 
 ## Installation / *Kurulum*
 
-1. **Clone the Repository / *Depoyu Klonlayın***:  
+
+1. **Install Necessary Packages / Gerekli Paketleri Yükleyin***
+    Aşağıdaki komut ile ihtiyaç duyulan kütüphaneleri yükleyin:
+    Install the required libraries with the following command:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-   cd YOUR_REPO
+   pip install scapy customtkinter
+
+
+3. **Download Project Files, Clone Project / Proje Dosyalarını İndirin, Projeyi Klonlayın***
+    GitHub üzerinden projeyi klonlayın veya ZIP olarak indirin:
+    Clone the project from GitHub or download it as a ZIP:
+   ```bash
+   git clone https://github.com/keyvanarasteh/Project.git
+   cd Project
    ```
 
-2. **Set Up Virtual Environment / *Sanal Ortam Kurulumu*** (Recommended):  
+5. **Launch the App / Uygulamayı Başlatın***
+   Aşağıdaki komutla uygulamayı başlatabilirsiniz:
+   You can start the application with the following command: 
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install Dependencies / *Bağımlılıkları Yükleyin***:  
-   ```bash
-   pip install -r requirements.txt
+   python app.py
    ```
 
 ---
