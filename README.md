@@ -16,18 +16,23 @@ Bu Python tabanlı gelişmiş ağ tarayıcı uygulaması, bağlı cihazları anl
 ## Features / *Özellikler*
 
 - **Network Scanning:** Scans your local network to discover active devices with their IP and MAC addresses.
+
   *Ağ Taraması:* Yerel ağdaki aktif cihazları IP ve MAC adresleriyle birlikte tarar.
 
 - **Vendor & Device Type Detection:** Identifies the manufacturer and estimates the type of each device (PC, phone, printer, etc.) using MAC address lookup.
+
   *Marka ve Cihaz Türü Tespiti:* MAC adresiyle üretici markasını bulur ve cihazın türünü tahmin eder (PC, telefon, yazıcı vb.).
 
 - **Open Port Detection:** Detects commonly used open ports (like 80, 443, 22, 3389) on each device for basic vulnerability awareness.
+
   *Açık Port Tespiti:* Her cihazda yaygın kullanılan açık portları (80, 443, 22, 3389) tespit eder.
 
 - **Real-Time GUI with Progress Bar:** Presents all results in a modern graphical interface with a live progress bar.
+
   *Gerçek Zamanlı Arayüz:* Tüm sonuçları canlı ilerleme çubuğu ile modern bir grafik arayüzde sunar.
 
 - **Custom IP Range Support:** Allows scanning of any given IP range within or beyond local network (as permitted).
+
   *Özelleştirilebilir IP Aralığı Desteği:* Belirtilen herhangi bir IP aralığında tarama yapabilir.
 
 
