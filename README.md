@@ -69,22 +69,40 @@ See our plans in [ROADMAP.md](ROADMAP.md).
 ## Installation / *Kurulum*
 
 
-1. **Install Necessary Packages / Gerekli Paketleri Yükleyin***
+1. **Python 3.10** 
+kurulu olup olmadığını kontrol edin:
+   ```bash
+   python --version
+   ```
+
+2.**pip** 
+kurulu olup olmadığını kontrol edin:
+   ```bash
+   pip --version
+   ```
+
+3.  **Install Necessary Packages / Gerekli Paketleri Yükleyin***
     Aşağıdaki komut ile ihtiyaç duyulan kütüphaneleri yükleyin:
     Install the required libraries with the following command:
+
    ```bash
-   pip install scapy customtkinter
+   pip install scapy
+   pip install customtkinter
+   ```
+4. **Npcap**
+  https://nmap.org/npcap/
 
+5. **Tkinter**
+Python ile birlikte gelen GUI kütüphanesi
 
-3. **Download Project Files, Clone Project / Proje Dosyalarını İndirin, Projeyi Klonlayın***
+6.**Download Project Files, Clone Project / Proje Dosyalarını İndirin, Projeyi Klonlayın***
     GitHub üzerinden projeyi klonlayın veya ZIP olarak indirin:
     Clone the project from GitHub or download it as a ZIP:
    ```bash
    git clone https://github.com/keyvanarasteh/Project.git
    cd Project
    ```
-
-5. **Launch the App / Uygulamayı Başlatın***
+7.  **Launch the App / Uygulamayı Başlatın***
    Aşağıdaki komutla uygulamayı başlatabilirsiniz:
    You can start the application with the following command: 
    ```bash
