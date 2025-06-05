@@ -99,19 +99,19 @@ Run the project:
 *Projeyi çalıştırın:*
 
 ```bash
-python main.py --input your_file.pcap --output results.txt
+python app.py
+
 ```
 
 **Steps**:  
-1. Prepare input data (*explain data needed*).  
-2. Run the script with arguments (*explain key arguments*).  
-3. Check output (*explain where to find results*).  
+1.Giriş ekranındaki IP aralığını kontrol edin. (Varsayılan: 192.168.1.0/24)
+2."Ağı Tara" butonuna tıklayın.
+3.Sonuçlar grafik arayüzde tablo olarak listelenecektir.
 
 *Adımlar*:  
-1. Giriş verilerini hazırlayın (*ne tür verilere ihtiyaç duyulduğunu açıklayın*).  
-2. Betiği argümanlarla çalıştırın (*önemli argümanları açıklayın*).  
-3. Çıktıyı kontrol edin (*sonuçları nerede bulacağınızı açıklayın*).
-
+1.IP aralığını belirtin (Varsayılan: 192.168.1.0/24)
+2."Ağı Tara" butonuna tıklayın.
+3.Sonuçları GUI üzerinden görüntüleyin.
 ---
 
 ## Contributing / *Katkıda Bulunma*
