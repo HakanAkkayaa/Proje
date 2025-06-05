@@ -104,14 +104,16 @@ python app.py
 ```
 
 **Steps**:  
-1. Prepare input data (*explain data needed*).  
-2. Run the script with arguments (*explain key arguments*).  
-3. Check output (*explain where to find results*).  
+1. Launch the application.  
+2. REnter the IP range (e.g., 192.168.1.0/24) in the input field.  
+3. Click the "Ağı Tara" (Scan Network) button.
+4. The results will appear in the table below the GUI: IP, MAC, vendor, device type, ping status, and open ports.
 
 *Adımlar*:  
-1.IP aralığını belirtin (Varsayılan: 192.168.1.0/24)
-2."Ağı Tara" butonuna tıklayın.
-3.Sonuçları GUI üzerinden görüntüleyin.
+1. Uygulamayı başlatın.
+2. IP aralığını girin (örneğin: 192.168.1.0/24).
+3. "Ağı Tara" butonuna tıklayın.
+4. Cihazlara ait IP, MAC, marka, cihaz türü, ping durumu ve açık portlar tablo şeklinde listelenir.
 ---
 
 ## Contributing / *Katkıda Bulunma*
