@@ -44,7 +44,7 @@ Bu Python tabanlı gelişmiş ağ tarayıcı uygulaması, bağlı cihazları anl
 | İsim            | Öğrenci No   | Rol              |
 | --------------- | ------------ | ---------------- |
 | [Hakan Akkaya]  | [2320191089] | Proje Lideri |
-| [Hilal Paksoy]  | [2320191015] | Proje Yardımcısı |
+| [Hilal Paksoy]  | [2320191085] | Proje Yardımcısı |
 | [Betül Kaya]    | [2320191088] | Proje Yardımcısı |
 
 ---
