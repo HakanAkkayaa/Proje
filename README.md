@@ -9,20 +9,28 @@
 
 # 🔍 Akıllı Ağ Tarayıcı 
   
-*Bu Python tabanlı gelişmiş ağ tarayıcı uygulaması, bağlı cihazları anlık olarak tespit eder, IP ve MAC adreslerini listeler, üretici markalarını belirler, cihaz türünü tahmin eder ve açık portlarını tarar. Modern bir grafik arayüz (GUI) ile sunulan bu araç sayesinde, ağını analiz etmek sadece tek bir tık uzağında!*
+Bu Python tabanlı gelişmiş ağ tarayıcı uygulaması, bağlı cihazları anlık olarak tespit eder, IP ve MAC adreslerini listeler, üretici markalarını belirler, cihaz türünü tahmin eder ve açık portlarını tarar. Modern bir grafik arayüz (GUI) ile sunulan bu araç sayesinde, ağını analiz etmek sadece tek bir tık uzağında!
 
 ---
 
 ## Features / *Özellikler*
 
-- **Feature 1:** Description of the feature.  
-  *Özellik 1: Özelliğin açıklaması.*
-- **Feature 2:** Another cool thing it does.  
-  *Özellik 2: Yaptığı başka bir harika şey.*
-- **Feature 3:** One more for good measure.  
-  *Özellik 3: Ve bir tane daha.*
-- Add more as they develop.  
-  *Geliştikçe daha fazla ekleyin.*
+- **Network Scanning:** Scans your local network to discover active devices with their IP and MAC addresses.
+  *Ağ Taraması:* Yerel ağdaki aktif cihazları IP ve MAC adresleriyle birlikte tarar.
+
+- **Vendor & Device Type Detection:** Identifies the manufacturer and estimates the type of each device (PC, phone, printer, etc.) using MAC address lookup.
+  *Marka ve Cihaz Türü Tespiti:* MAC adresiyle üretici markasını bulur ve cihazın türünü tahmin eder (PC, telefon, yazıcı vb.).
+
+- **Open Port Detection:** Detects commonly used open ports (like 80, 443, 22, 3389) on each device for basic vulnerability awareness.
+  *Açık Port Tespiti:* Her cihazda yaygın kullanılan açık portları (80, 443, 22, 3389) tespit eder.
+
+- **Real-Time GUI with Progress Bar:** Presents all results in a modern graphical interface with a live progress bar.
+  *Gerçek Zamanlı Arayüz:* Tüm sonuçları canlı ilerleme çubuğu ile modern bir grafik arayüzde sunar.
+
+- **Custom IP Range Support:** Allows scanning of any given IP range within or beyond local network (as permitted).
+  *Özelleştirilebilir IP Aralığı Desteği:* Belirtilen herhangi bir IP aralığında tarama yapabilir.
+
+
 
 ---
 
