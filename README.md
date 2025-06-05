@@ -58,14 +58,11 @@ See our plans in [ROADMAP.md](ROADMAP.md).
 
 ## Research / *Araştırmalar*
 
-| Topic / *Başlık*                  | Link                                                                | Description / *Açıklama*                                                  |
-|-----------------------------------|---------------------------------------------------------------------|---------------------------------------------------------------------------|
-| MAC & OUI Analysis                | [researchs/mac-oui-analysis.md](researchs/mac-oui-analysis.md)      | MAC adresinden üretici tespiti ve OUI verisinin kullanımı üzerine çalışma.|
-| Device Fingerprinting Techniques  | [researchs/device-fingerprint.md](researchs/device-fingerprint.md)  | Cihaz türünü vendor ve port verisiyle tahmin etme yöntemleri.             |
-| Scapy for ARP Scanning            | [researchs/scapy-arp.md](researchs/scapy-arp.md)                    | Scapy ile ARP üzerinden ağ taraması.                                      |
-| Port Scanning Basics              | [researchs/port-scanning.md](researchs/port-scanning.md)            | Socket ile temel port tarama teknikleri.                                  |
-| CustomTkinter GUI Usage           | [researchs/gui-customtkinter.md](researchs/gui-customtkinter.md)    | Modern arayüz tasarımı için CustomTkinter kütüphanesi kullanımı.          |
-| Future Ideas (Firmware/CVE OSINT) | [researchs/future-ideas.md](researchs/future-ideas.md)              | Firmware ve CVE OSINT analiz entegrasyonu için öneriler.                  |
+| Topic / *Başlık*        | Link                                    | Description / *Açıklama*                        |
+|-------------------------|-----------------------------------------|------------------------------------------------|
+| Aircrack Deep Dive      | [researchs/aircrack.md](researchs/aircrack.md) | In-depth analysis of Aircrack-ng suite. / *Aircrack-ng paketinin derinlemesine analizi.* |
+| Example Research Topic  | [researchs/your-research-file.md](researchs/your-research-file.md) | Brief overview of this research. / *Bu araştırmanın kısa bir özeti.* |
+| Add More Research       | *Link to your other research files*     | *Description of the research*                  |     buu kendi projeme nasıl uyarlayabilirim
 
 
 ---
