@@ -68,20 +68,21 @@ See our plans in [ROADMAP.md](ROADMAP.md).
 
 ## Installation / *Kurulum*
 
-
 1. **Python 3.10** 
 kurulu olup olmadığını kontrol edin:
+
    ```bash
    python --version
    ```
 
-2.**pip** 
+3. **Pip** 
 kurulu olup olmadığını kontrol edin:
+
    ```bash
    pip --version
    ```
 
-3.  **Install Necessary Packages / Gerekli Paketleri Yükleyin***
+4. **Install Necessary Packages / Gerekli Paketleri Yükleyin***
     Aşağıdaki komut ile ihtiyaç duyulan kütüphaneleri yükleyin:
     Install the required libraries with the following command:
 
