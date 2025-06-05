@@ -136,19 +136,6 @@ python app.py
 4. Cihazlara ait IP, MAC, marka, cihaz türü, ping durumu ve açık portlar tablo şeklinde listelenir.
 ---
 
-## Contributing / *Katkıda Bulunma*
-
-We welcome contributions! To help:  
-1. Fork the repository.  
-2. Clone your fork (`git clone git@github.com:YOUR_USERNAME/YOUR_REPO.git`).  
-3. Create a branch (`git checkout -b feature/your-feature`).  
-4. Commit changes with clear messages.  
-5. Push to your fork (`git push origin feature/your-feature`).  
-6. Open a Pull Request.  
-
-Follow our coding standards (see [CONTRIBUTING.md](CONTRIBUTING.md)).  
-
-*Topluluk katkilerini memnuniyetle karşılıyoruz! Katkıda bulunmak için yukarıdaki adımları izleyin ve kodlama standartlarımıza uyun.*
 
 ---
 
@@ -172,11 +159,6 @@ Thanks to:
 
 ## Contact / *İletişim* (Optional)
 
-Project Maintainer: [Your Name/Org Name] - [your.email@example.com]  
+Project Maintainer: Hakan Akkaya - akkayahakan50@gmail.com  
 Found a bug? Open an issue.  
 
-*Proje Sorumlusu: [Adınız/Kuruluş Adınız] - [e-posta.adresiniz@ornek.com]. Hata bulursanız bir sorun bildirin.*
-
----
-
-*Replace placeholders (e.g., YOUR_USERNAME/YOUR_REPO) with your project details.*
