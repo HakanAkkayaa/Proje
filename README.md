@@ -39,14 +39,13 @@ Bu Python tabanlı gelişmiş ağ tarayıcı uygulaması, bağlı cihazları anl
 
 ---
 
-## Team / *Ekip*
+## 👥 Takım Bilgileri
 
-- **219*****031** - Name Surname: *Role or Contribution*  
-  *Ad Soyad: Rolü veya Katkısı*
-- **Another Member** - Name Surname: *Role or Contribution*  
-  *Ad Soyad: Rolü veya Katkısı*
-- Add more members as needed.  
-  *Gerektiğinde daha fazla üye ekleyin.*
+| İsim            | Öğrenci No   | Rol              |
+| --------------- | ------------ | ---------------- |
+| [Hakan Akkaya]  | [2320191089] | Proje Lideri |
+| [Hilal Paksoy]  | [2320191015] | Proje Yardımcısı |
+| [Betül Kaya]    | [2320191088] | Proje Yardımcısı |
 
 ---
 
