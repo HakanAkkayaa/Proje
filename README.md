@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=flat-square" alt="Contributions">
 </div>
 
-# 🔍 Akıllı Ağ Tarayıcı 
+# 🔍 Akıllı Ağ Tarayıcı .
   
 Bu Python tabanlı gelişmiş ağ tarayıcı uygulaması, bağlı cihazları anlık olarak tespit eder, IP ve MAC adreslerini listeler, üretici markalarını belirler, cihaz türünü tahmin eder ve açık portlarını tarar. Modern bir grafik arayüz (GUI) ile sunulan bu araç sayesinde, ağını analiz etmek sadece tek bir tık uzağında!
 
